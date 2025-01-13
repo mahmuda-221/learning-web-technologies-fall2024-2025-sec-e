@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Author</title>
+</head>
+<body>
+    <input type="text" id="search" placeholder="Search authors by name">
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('search').addEventListener('input', function() {
+            const query = this.value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '../php/search_ajax.php?q=' + query, true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById('results').innerHTML = this.responseText;
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
